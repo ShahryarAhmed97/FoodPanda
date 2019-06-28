@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { update_user } from '../store/action';
-import signUpFun from '../config/firebase'
+// import { update_user } from '../store/action';
+import {signUpFun} from '../config/firebase'
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody } from 'mdbreact';
+import {signLogTog} from '../store/action'
 
 
  class FormPage extends Component {
@@ -21,6 +22,13 @@ import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody } 
      }
    }
 
+   showLogForm(){
+    //  this.props.signLogTog(false)
+    this.props.history.push('/LogIn')
+
+     console.log('signwala')
+
+   }
 
    submitForm(e){
      const {fullName,email,password,cnfrmPass,country,age,city,gender}=this.state
@@ -39,6 +47,8 @@ import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody } 
 
      }
     //  this.props.store_user(user);
+
+    signUpFun(user)
      this.setState({
       fullName :'',
       email:'',
@@ -152,7 +162,15 @@ import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody } 
                   <MDBBtn color="cyan"  onClick={(e)=>this.submitForm(e)}>
                     Register
                   </MDBBtn>
+
                 </div>
+
+                <div className="text-center py-4 mt-3">
+                  <MDBBtn color="cyan"  onClick={(e)=>this.showLogForm(e)}>
+                    Log In
+                  </MDBBtn>
+                </div>
+
               </form>
             </MDBCardBody>
           </MDBCard>
@@ -172,7 +190,9 @@ import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody } 
 
   const mapDispatchToProps = dispatch => {
     return {
-        store_user: (user) => dispatch(update_user(user)),
+      signLogTog: (val) => dispatch(signLogTog(val)),
+
+        // store_user: (user) => dispatch(update_user(user)),
         
     }
 }

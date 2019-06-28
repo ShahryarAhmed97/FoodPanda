@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { update_user ,remove_user,checkFun } from '../store/action';
-
+import {userLogInBool,signLogTog} from '../store/action';
+import {restLogInFun} from '../config/firebase'
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody } from 'mdbreact';
 
 
@@ -11,30 +11,42 @@ import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody } 
      this.state={
        email:'',
        password:'',
-       bol:false,
-       check:'Unchecked',
-       loggedIn:false
+     
 
      }
    }
 
+   showSignForm(){
+    this.props.signLogTog(true)
 
-   LoginForm(e){
-     const {email,password,check,loggedIn}=this.state
+  }
+   
+
+  async LoginForm(e){
+    const {email,password}=this.state
+    try{
+
+    
      e.preventDefault()
      
-     console.log(email,password,check,loggedIn)
+     console.log(email,password)
      const user={
-       check,
+      //  check,
 
       email,
       password,
-      loggedIn:true
+
+      // loggedIn:true
 
      }
+  
+     var res=await restLogInFun(user)
+     if(res){
 
-     this.props.store_user(user);
-     this.props.check_fun(true)
+       this.props.userLogInBool(true)
+     }
+    //  this.props.store_user(user)
+
 
 
     // if(check=='Unchecked'){
@@ -53,11 +65,17 @@ import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody } 
      this.setState({
       email:'',
       password:'',
-      check:'',
+      // check:'',
       
       
      })
-   }
+    }
+
+   catch(e){
+      console.log(e)
+
+    }
+  }
 
 
    checkFun(e){
@@ -78,13 +96,13 @@ console.log(bol,check)
   
   render() {
   return (
-    <MDBContainer>
+    <MDBContainer className='col-md-6 offset-md-3'>
       <MDBRow>
-        <MDBCol md="6">
+        <MDBCol md="6"> 
           <MDBCard>
             <MDBCardBody>
               <form>
-                <p className="h4 text-center py-4">Sign up</p>
+                <p className="h4 text-center py-4">Log In</p>
                 <div className="grey-text">
                 {console.log(this.props.user)}
 
@@ -115,7 +133,13 @@ console.log(bol,check)
     
                 <div className="text-center py-4 mt-3">
                   <MDBBtn color="cyan"  onClick={(e)=>this.LoginForm(e)}>
-                    Register
+                    LogIn
+                  </MDBBtn>
+                </div>
+
+                <div className="text-center py-4 mt-3">
+                  <MDBBtn color="cyan"  onClick={(e)=>this.showSignForm(e)}>
+                    Sign Up
                   </MDBBtn>
                 </div>
 
@@ -138,9 +162,11 @@ console.log(bol,check)
 
   const mapDispatchToProps = dispatch => {
     return {
-        store_user: (user) => dispatch(update_user(user)),
-        remove_user: () => dispatch(remove_user()),
-        check_fun: (check) => dispatch(checkFun(check)),
+      userLogInBool: (val) => dispatch(userLogInBool(val)),
+      signLogTog: (val) => dispatch(signLogTog(val)),
+
+        // remove_user: () => dispatch(remove_user()),
+        // check_fun: (check) => dispatch(checkFun(check)),
     }
 }
 

@@ -1,78 +1,49 @@
-import React, { Component } from 'react'
+ import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import LogIn from './LogIn'
-import Home from './Home'
-import SignUp from './SignUp'
-import { checkFun } from '../store/action';
+import LogIn from './userLogIn'
+import UserHome from './userHome'
+import SignUp from './userSignUp';
+import RestSignUp from './RestSignUp'
+import {signLogTog} from '../store/action'
+import RestHome from './RestHome'
+import AppHome from './AppHome'
+
+
+class Screens extends Component {
+    constructor(){
+        super()
+        this.state={
+            localCheck:true,
+
+
+        }
+     }
 
 
 
- class Screens extends Component {
-constructor(){
-    super()
-    this.state={
-        localCheck:true
 
-    }
-
-    
-
-}
-
-
-
-componentDidMount(){
-    this.setState({localCheck:false})
-    console.log(this.state.localCheck)
-
-    // window.addEventListener('onbeforeunload',()=>{
-
-
-    //     console.log('mount chala',this.props.user.check)
-    // if(this.props.user.check=='Unchecked'){
-
-    //     this.props.check_fun(false)
-    //     // this.setState({localCheck:false})
-    //     // console.log(this.state.localCheck)
-    
-    // }
-
-    // })
-
-}
-
-
-
-// componentWillUpdate(newState,newProps){
-
-//     console.log('mount chala',this.props.user.check)
-//     if(this.props.user.check=='Unchecked'){
-
-//         this.props.check_fun(false)
-//     }
-
-// }
-
-// componentWillUnmount(){
-//     console.log('mount chala',this.props.user.check)
-//     if(this.props.user.check=='Unchecked'){
-
-//         this.props.check_fun(false)
-//         // this.setState({localCheck:false})
-//         // console.log(this.state.localCheck)
-    
-//     }
-
-// }
-
-
-
-    render() {
-        
-
-        
+render() {
         return (
-            <SignUp />
+            <div>
+                {console.log(this.props.signLogTog)}
+           {/* {!this.props.userLogInBool && this.props.signLogTog && <SignUp /> } */}
+           {/* { !this.props.userLogInBool && !this.props.restSignTog && <RestSignUp />} */}
+           {/* {   !this.props.restHomeTog && !this.props.userLogInBool && this.props.signLogTog  && <LogIn />} */}
+           {/* {    this.props.restHomeTog && <RestHome />}          */}
+          {/* {  this.props.userLogInBool && <UserHome /> } */}
+         
+               {/* { <AppHome />} */}
+             {/* {   <RestHome />} */}
+            {/* <UserHome /> */}
+            {/* <SignUp /> */}
+            {/* <LogIn /> */}
+            {/* <RestSignUp /> */}
+
+
+           
+
+         
+            </div>
 
         )
     }
@@ -84,8 +55,12 @@ componentDidMount(){
 const mapStateToProps = state => {
 //   console.log('In screens',state)
   return {
-      user: state.user ? state.user :{},
-      check:state.check  ,
+    //   user: state.user ? state.user :{},
+     
+      userLogInBool:state.userLogInBool ,
+      restHomeTog:state.restHomeTog,
+      restSignTog:state.restSignTog,
+      signLogTog:state.signLogTog ? state.signLogTog :true,
 
   }
 }
@@ -93,8 +68,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        check_fun: (check) => dispatch(checkFun(check)),
-       
+        // check_fun: (check) => dispatch(checkFun(check)),
+        signLogTog: (val) => dispatch(signLogTog(val)),
+
     }
 }
 
@@ -104,27 +80,3 @@ export default connect(mapStateToProps,mapDispatchToProps)(Screens);
 
 
 
-
-
-
-// <div >
-
-// {/* <SignUp /> */     console.log(this.state.localCheck)
-// }
-// {/* {console.log(this.props.user.loggedIn)} */}
-// {/* {!this.props.loggedIn && <LogIn   /> } 
-// { this.props.loggedIn && <Home /> }
-//          */}
-
-// {!this.props.user.loggedIn   &&  <LogIn   /> } 
-// {
-    
-//     this.props.user.loggedIn && this.props.check &&  <Home />
-     
-// }
-// {
-//   this.props.user.loggedIn && this.state.localCheck && <Home />
-// }
-// {/* { this.props.user.loggedIn && this.state.localCheck==true && <Home /> } */}
-//     </div>
-// )
