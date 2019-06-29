@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {signUpFun} from '../config/firebase'
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody } from 'mdbreact';
 import {signLogTog} from '../store/action'
+import '../assests/css/appHome.css'
 
 
  class FormPage extends Component {
@@ -24,8 +25,7 @@ import {signLogTog} from '../store/action'
 
    showLogForm(){
     //  this.props.signLogTog(false)
-    this.props.history.push('/LogIn')
-
+    this.props.history.push('/')
      console.log('signwala')
 
    }
@@ -63,10 +63,11 @@ import {signLogTog} from '../store/action'
   
   render() {
   return (
-    <MDBContainer>
+    <div className='bg' style={{width:'100%', height:'1100px',marginTop:'0px'}}>
+    <MDBContainer  className='col-12  bg ' style={{height:'100%',width:'100%'}}>
       <MDBRow>
-        <MDBCol md="6">
-          <MDBCard>
+        <MDBCol md="8">
+          <MDBCard  style={{marginTop:'50px',marginLeft:'45%'}}>
             <MDBCardBody>
               <form>
                 <p className="h4 text-center py-4">Sign up</p>
@@ -159,17 +160,17 @@ import {signLogTog} from '../store/action'
                 
     
                 <div className="text-center py-4 mt-3">
-                  <MDBBtn color="cyan"  onClick={(e)=>this.submitForm(e)}>
+                  <MDBBtn color="green"  onClick={(e)=>this.submitForm(e)}>
                     Register
                   </MDBBtn>
-
-                </div>
-
-                <div className="text-center py-4 mt-3">
+                  <br />
+                  <br />
                   <MDBBtn color="cyan"  onClick={(e)=>this.showLogForm(e)}>
-                    Log In
+                   Back to Home
                   </MDBBtn>
                 </div>
+
+               
 
               </form>
             </MDBCardBody>
@@ -177,6 +178,7 @@ import {signLogTog} from '../store/action'
         </MDBCol>
       </MDBRow>
     </MDBContainer>
+    </div>
     )
    }
   }

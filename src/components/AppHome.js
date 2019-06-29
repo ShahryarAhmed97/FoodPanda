@@ -8,6 +8,7 @@ import c1 from '../assests/c1.jpg'
 import c2 from '../assests/c2.jpg'
 import c3 from '../assests/c3.jpg'
 import c4 from '../assests/c4.jpg'
+import logo1 from '../assests/logo.png'
 import '../assests/css/appHome.css'
 import {restSignTog,userLogInBool,signLogTog} from '../store/action'
 import { connect } from 'react-redux';
@@ -48,7 +49,16 @@ goToLogIn(){
         return (
             <div className='bg ' style={{height:'657px'}} >
      <Navbar bg="dark" variant="dark">
-    <Navbar.Brand href="#home">Food Panda</Navbar.Brand>
+    <Navbar.Brand href="#home">
+    {/* <img
+        src={logo1}
+        width="50"
+        height="50"
+        className="d-inline-block align-top"
+        alt="React Bootstrap logo"
+      /> */}
+      Food Panda
+    </Navbar.Brand>
     <Nav className="mr-auto">
       <Nav.Link href="#home"></Nav.Link>
       <Nav.Link href="#features"></Nav.Link>
@@ -62,7 +72,7 @@ goToLogIn(){
     </Form>
   </Navbar>
 
-  <div  className=' col-md-8 offset-md-2' style={{marginTop:'10%'}} >
+  <div  className=' col-md-8 offset-md-2' style={{marginTop:'10%' ,marginLeft:'23%'}} >
           <h1 style={{color:'white'}}>Welcome To Our Website Have a Nice Meal</h1>
   </div>
 

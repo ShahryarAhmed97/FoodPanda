@@ -5,7 +5,7 @@ import {logInFun} from '../config/firebase'
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody } from 'mdbreact';
 
 import {    MDBCardImage, MDBCardTitle, MDBCardText } from 'mdbreact';
-
+import '../assests/css/appHome.css'
  class FormPage extends Component {
    constructor(){
      super();
@@ -16,6 +16,11 @@ import {    MDBCardImage, MDBCardTitle, MDBCardText } from 'mdbreact';
      
 
      }
+
+    //  if(this.props.userLogInBool==true){
+    //            this.props.history.push('/')
+
+    //  }
    }
 
    showSignForm(){
@@ -53,6 +58,7 @@ import {    MDBCardImage, MDBCardTitle, MDBCardText } from 'mdbreact';
      console.log(res)
 
      if(res && userType=='loginUser'){
+       this.props.userLogInBool(true)
       this.props.history.push('/UserHome')
 
 
@@ -61,6 +67,8 @@ import {    MDBCardImage, MDBCardTitle, MDBCardText } from 'mdbreact';
 
     //  var res=await logInFun(user)
      if(res && userType=='loginRest'){
+      this.props.userLogInBool(true)
+
       this.props.history.push('/RestHome')
       //  this.props.restHomeTog(true)
      }
@@ -98,11 +106,18 @@ console.log(bol,check)
    }
   
   render() {
+// console.log(this.props.userLogInBool)
+//     if(this.props.userLogInBool){
+//       this.props.history.push('/UserHome')
+//     }
   return (
-    <MDBContainer className='col-6 '>
-      <MDBRow>
+    <div className='bg' style={{width:'100%', height:'657px',marginTop:'0px'}} >
+
+   
+    <MDBContainer className='col-12  bg ' style={{height:'100%',width:'100%'}}>
+      <MDBRow >
         <MDBCol md="8"> 
-          <MDBCard>
+          <MDBCard style={{marginTop:'50px',marginLeft:'45%'}}>
             <MDBCardBody>
               <form>
                 <p className="h4 text-center py-4">Log In</p>
@@ -146,16 +161,18 @@ console.log(bol,check)
                 
     
                 <div className="text-center py-4 mt-3">
-                  <MDBBtn color="cyan"  onClick={(e)=>this.LoginForm(e)}>
+                  <MDBBtn color="green"  onClick={(e)=>this.LoginForm(e)}>
                     LogIn
                   </MDBBtn>
-                </div>
-
-                <div className="text-center py-4 mt-3">
+                  <br />
                   <MDBBtn color="cyan"  onClick={(e)=>this.showSignForm(e)}>
                     Go To Home
                   </MDBBtn>
                 </div>
+
+                {/* <div className="text-center py-4 mt-3">
+                  
+                </div> */}
 
               </form>
             </MDBCardBody>
@@ -163,6 +180,7 @@ console.log(bol,check)
         </MDBCol>
       </MDBRow>
     </MDBContainer>
+    </div>
     )
    }
   }
@@ -170,7 +188,9 @@ console.log(bol,check)
   const mapStateToProps = state => {
     console.log(state)
     return {
-        user: state.user
+        user: state.user,
+        userLogInBool:state.userLogInBool,
+        
     }
 }
 

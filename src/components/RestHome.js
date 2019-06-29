@@ -57,8 +57,8 @@ return(
 
 
 
-    <MDBCol style={{marginBottom:'30px'}}>
-      <MDBCard style={{ width: "20rem" }}>
+    <MDBCol style={{marginBottom:'15px'}}>
+      <MDBCard style={{ width: "18rem" }}>
         <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" waves />
         <MDBCardBody>
           <MDBCardTitle>{val.dshName} </MDBCardTitle>
@@ -149,8 +149,8 @@ console.log('prob',this.state.userReqsArr)
       
  
  
-        <MDBCol className='row' style={{marginBottom:'30px',marginLeft:'30px'}}>
-      <MDBCard style={{ width: "20rem" }}>
+        <MDBCol className='row' style={{marginBottom:'30px',marginLeft:'15px'}}>
+      <MDBCard style={{ width: "18rem" }}>
         <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" waves />
         <MDBCardBody>
           <MDBCardTitle>{val.dshName} </MDBCardTitle>
@@ -240,8 +240,8 @@ console.log('prob',this.state.userReqsArr)
       
  
  
-        <MDBCol className='row' style={{marginBottom:'30px',marginLeft:'30px'}}>
-      <MDBCard style={{ width: "20rem" }}>
+        <MDBCol className='row' style={{marginBottom:'30px',marginLeft:'15px'}}>
+      <MDBCard style={{ width: "18rem" }}>
         <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" waves />
         <MDBCardBody>
           <MDBCardTitle>{val.dshName} </MDBCardTitle>
@@ -330,8 +330,8 @@ console.log('prob',this.state.userReqsArr)
       
  
  
-        <MDBCol className='row' style={{marginBottom:'30px',marginLeft:'30px'}}>
-      <MDBCard style={{ width: "20rem" }}>
+        <MDBCol className='row' style={{marginBottom:'30px',marginLeft:'15px'}}>
+      <MDBCard style={{ width: "18rem" }}>
         <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" waves />
         <MDBCardBody>
           <MDBCardTitle>{val.dshName} </MDBCardTitle>
@@ -409,11 +409,11 @@ function TabContainer(props) {
       <div className={classes.root} >
         <AppBar position="static">
           <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="off">
-          <Tab icon={<ShoppingBasket />} aria-label="Shopping" />
-            <Tab icon={<PersonPinIcon />} aria-label="Person" />
-            <Tab icon={<ShoppingBasket />} aria-label="Shopping" />
+          <Tab icon={<ShoppingBasket />} aria-label="Shopping" label='HOME' />
+            <Tab icon={<PersonPinIcon />} aria-label="Person" label='Pending' />
+            <Tab icon={<ShoppingBasket />} aria-label="Shopping" label='In Progress' />
        
-            <Tab icon={<ShoppingBasket />} aria-label="Shopping" />
+            <Tab icon={<ShoppingBasket />} aria-label="Shopping" label='Delivered' />
           </Tabs>
         </AppBar>
         {value === 0 && <TabContainer><AllDishes /></TabContainer>}
@@ -440,6 +440,17 @@ function TabContainer(props) {
          }
      }
 
+
+    //  componentWillUnmount(){
+
+    //   if(this.props.userLogInBool==true){
+       
+    //            this.props.history.push('/RestHome')
+
+    //            }
+
+    //  }
+
     async logOutUser(){
 
      
@@ -447,6 +458,7 @@ function TabContainer(props) {
     
             var res =await logOutFun()
             console.log(res)
+            this.props.userLogInBool(false)
             this.props.history.push('/LogIn')
             if(res){
             }
@@ -500,12 +512,14 @@ const mapStateToProps = state => {
     console.log(state)
     return {
         user: state.user,
-        dishBool:state.dishBool
+        dishBool:state.dishBool,
+        userLogInBool:state.userLogInBool
     }
 }
 
   const mapDispatchToProps = dispatch => {
     return {
+      userLogInBool: (val) => dispatch(userLogInBool(val)),
       restHomeTog: (val) => dispatch(restHomeTog(val)),
       dishBool: (val) => dispatch(dishBool(val)),
        

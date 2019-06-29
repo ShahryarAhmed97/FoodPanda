@@ -83,7 +83,7 @@ class AddDishCats extends Component {
      return (
        <div>
  
- <MDBContainer className='col-md-8 offset-md-2'>
+ <MDBContainer className='col-md-8 offset-md-2' style={{marginTop:'50px',marginLeft:'33%'}}>
        <MDBRow>
          <MDBCol md="6"> 
            <MDBCard>
